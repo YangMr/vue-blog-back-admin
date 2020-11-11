@@ -31,18 +31,19 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
+  //登录
   {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
+  //404
   {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
-
+  //首页
   {
     path: '/',
     component: Layout,
@@ -50,101 +51,76 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      component: () => import('@/views/index/index'),
+      meta: { title: '首页', icon: 'el-icon-s-home', affix: true }
     }]
   },
-
+  //博客管理
   {
-    path: '/example',
+    path: '/blog',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/blog',
+    name: 'blog',
+    meta: { title: '博客管理', icon: 'el-icon-notebook-2' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'article',
+        name: 'Article',
+        component: () => import('@/views/article/index'),
+        meta: { title: '文章管理', icon: 'el-icon-notebook-1' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'category',
+        name: 'Category',
+        component: () => import('@/views/category/index'),
+        meta: { title: '分类管理', icon: 'el-icon-s-order' }
+      },
+      {
+        path: 'label',
+        name: 'Label',
+        component: () => import('@/views/label/index'),
+        meta: { title: '标签管理', icon: 'el-icon-collection-tag' }
       }
     ]
   },
 
   {
-    path: '/form',
+    path: '/advert',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        name: 'Index',
+        component: () => import('@/views/advert/index'),
+        meta: { title: '广告管理', icon: 'el-icon-picture-outline-round ' }
       }
     ]
   },
 
   {
-    path: '/nested',
+    path: '/system',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
+    redirect: '/system/user',
+    name: 'system',
+    meta: { title: '系统管理', icon: 'el-icon-setting' },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'user',
+        component: () => import('@/views/user/index'), // Parent router-view
+        name: 'User',
+        meta: { title: '用户管理', icon: "el-icon-user-solid" }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'role',
+        component: () => import('@/views/role/index'),
+        name: 'Role',
+        meta: { title: '角色管理', icon: "el-icon-coin" }
+      },
+      {
+        path: 'menu',
+        component: () => import('@/views/menu/index'),
+        name: 'Menu',
+        meta: { title: '菜单管理', icon: "el-icon-menu" }
       }
     ]
   },
@@ -154,8 +130,20 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'http://www.usian.cn/index',
+        meta: { title: '积云教育官网', icon: 'el-icon-link' }
+      }
+    ]
+  },
+
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
       }
     ]
   },
